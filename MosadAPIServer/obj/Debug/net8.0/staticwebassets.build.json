@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "NfJEjeY8p6nHVPXCX0smxBEnscoXsLP/7iUYKvF7duo=",
+  "Source": "MosadAPIServer",
+  "BasePath": "_content/MosadAPIServer",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
