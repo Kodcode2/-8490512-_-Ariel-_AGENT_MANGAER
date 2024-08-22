@@ -1,5 +1,4 @@
 ﻿using MosadAPIServer.Enums;
-using MosadAPIServer.SubModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
