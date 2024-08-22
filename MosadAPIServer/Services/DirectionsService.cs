@@ -32,9 +32,14 @@ namespace MosadAPIServer.Services
             _ => throw new Exception("")
         };
 
-        public static void Move(Location src , string dir)
+        public static Location Move(Location src , string dir)
         {
-            src += GetDirectionFromString(dir);
+           return src + GetDirectionFromString(dir);
+        }
+
+        public static Location MoveTowards(Location src, Location target)
+        {
+            throw new NotImplementedException();
         }
     }
 }

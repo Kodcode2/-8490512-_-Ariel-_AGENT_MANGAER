@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MosadAPIServer.Data;
 using MosadAPIServer.DTO;
 using MosadAPIServer.Models;
+using MosadAPIServer.Enums;
 
 namespace MosadAPIServer.Services
 {
@@ -34,8 +35,21 @@ namespace MosadAPIServer.Services
         public Task MoveAsync(int id, string dir)
         {
             var agent = _context.Agent.Find(id);
+            Location newLocation = agent.GetLocation();//if agent null the controller catches
 
-            DirectionsService
+            if (agent.Status == AgentStatus.Idle)
+            {
+                newLocation = DirectionsService.Move(agent.GetLocation(), dir); 
+
+            }
+            else if (agent.Status != AgentStatus.Active)
+            {
+                var target = _context.Agent.Where(a=>a.Id == id).Include(a=>a.Missions.Where(m=>m.Status == MissionStatus.Assigned) ?? new List<Mission>());
+                newLocation = DirectionsService.MoveTowards(agent.GetLocation(), dir);
+            }
+            
+            agent.SetLocation(newLocation);
+
 
         }
 

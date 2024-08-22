@@ -19,7 +19,7 @@ namespace MosadAPIServer.Models
         public string NickName { get; set; }
         public AgentStatus Status { get; set; } = AgentStatus.Idle;
         public int TotalKills { get; set; } = 0;
-        List<Mission>? Missions { get; set; }
+        public List<Mission>? Missions { get; set; }
 
         public Agent() { }
         public Agent(AgentDTO agentDTO)
@@ -31,6 +31,11 @@ namespace MosadAPIServer.Models
         public Location GetLocation()
         {
             return new Location(LocationX ?? 0,LocationY ?? 0);
+        }
+        public void SetLocation(Location newLocation)
+        {
+            LocationX = newLocation.X;
+            LocationY = newLocation.Y;
         }
     }
 }

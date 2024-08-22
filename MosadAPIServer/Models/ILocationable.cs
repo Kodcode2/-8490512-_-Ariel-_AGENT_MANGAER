@@ -7,5 +7,6 @@ namespace MosadAPIServer.Models
         public int? LocationY { get; set; }
 
         public Location GetLocation();
+        public void SetLocation(Location newLocation);
     }
 }

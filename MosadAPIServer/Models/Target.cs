@@ -11,7 +11,7 @@ using MosadAPIServer.ModelsHelpers;
 
 namespace MosadAPIServer.Models
 {
-    public class Target : IModel , ILocationable
+    public class Target : IModel, ILocationable
     {
         public Target(TargetDTO targetDTO)
         {
@@ -37,6 +37,12 @@ namespace MosadAPIServer.Models
         public Location GetLocation()
         {
             return new Location(LocationX ?? 0, LocationY ?? 0);
+        }
+
+        public void SetLocation(Location newLocation)
+        {
+            LocationX = newLocation.X;
+            LocationY = newLocation.Y;
         }
     }
 }
