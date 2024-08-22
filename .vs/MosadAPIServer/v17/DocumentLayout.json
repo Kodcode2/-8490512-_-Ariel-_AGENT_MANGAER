@@ -3,16 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\services\\agentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\services\\agentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\services\\icruservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\services\\icruservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\services\\targetservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\services\\targetservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\controllers\\agentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\controllers\\agentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\modelshelpers\\location.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\modelshelpers\\location.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\modelshelpers\\directions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\modelshelpers\\directions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\middleware\\authmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\middleware\\authmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\services\\agentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\services\\agentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\models\\mission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\models\\mission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\models\\agent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\models\\agent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\enums\\targetstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\enums\\targetstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\models\\target.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\models\\target.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -35,22 +67,6 @@
       "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\controllers\\targetscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\modelshelpers\\location.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\modelshelpers\\location.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\models\\target.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\models\\target.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\models\\agent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\models\\agent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\models\\mission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\models\\mission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|c:\\users\\yaakovgottlib\\source\\repos\\mosadapiserver\\mosadapiserver\\enums\\agentstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA85187B-7589-416B-B12A-CE558301ED8A}|MosadAPIServer\\MosadAPIServer.csproj|solutionrelative:mosadapiserver\\enums\\agentstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -70,55 +86,98 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TargetService.cs",
+              "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Services\\TargetService.cs",
+              "RelativeDocumentMoniker": "MosadAPIServer\\Services\\TargetService.cs",
+              "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Services\\TargetService.cs",
+              "RelativeToolTip": "MosadAPIServer\\Services\\TargetService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-22T07:16:13.379Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "ICruService.cs",
+              "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Services\\ICruService.cs",
+              "RelativeDocumentMoniker": "MosadAPIServer\\Services\\ICruService.cs",
+              "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Services\\ICruService.cs",
+              "RelativeToolTip": "MosadAPIServer\\Services\\ICruService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-22T06:53:36.524Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Location.cs",
+              "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\ModelsHelpers\\Location.cs",
+              "RelativeDocumentMoniker": "MosadAPIServer\\ModelsHelpers\\Location.cs",
+              "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\ModelsHelpers\\Location.cs",
+              "RelativeToolTip": "MosadAPIServer\\ModelsHelpers\\Location.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-22T06:43:47.642Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Directions.cs",
+              "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\ModelsHelpers\\Directions.cs",
+              "RelativeDocumentMoniker": "MosadAPIServer\\ModelsHelpers\\Directions.cs",
+              "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\ModelsHelpers\\Directions.cs",
+              "RelativeToolTip": "MosadAPIServer\\ModelsHelpers\\Directions.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-22T06:19:34.741Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "TargetStatus.cs",
+              "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Enums\\TargetStatus.cs",
+              "RelativeDocumentMoniker": "MosadAPIServer\\Enums\\TargetStatus.cs",
+              "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Enums\\TargetStatus.cs",
+              "RelativeToolTip": "MosadAPIServer\\Enums\\TargetStatus.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-22T05:57:24.916Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "AuthMiddleWare.cs",
               "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\MiddleWare\\AuthMiddleWare.cs",
               "RelativeDocumentMoniker": "MosadAPIServer\\MiddleWare\\AuthMiddleWare.cs",
               "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\MiddleWare\\AuthMiddleWare.cs",
               "RelativeToolTip": "MosadAPIServer\\MiddleWare\\AuthMiddleWare.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAoAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-21T14:15:32.837Z"
+              "WhenOpened": "2024-08-21T14:15:32.837Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MissionStatus.cs",
-              "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Enums\\MissionStatus.cs",
-              "RelativeDocumentMoniker": "MosadAPIServer\\Enums\\MissionStatus.cs",
-              "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Enums\\MissionStatus.cs",
-              "RelativeToolTip": "MosadAPIServer\\Enums\\MissionStatus.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-21T14:03:31.844Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MosadAPIServerContext.cs",
-              "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Data\\MosadAPIServerContext.cs",
-              "RelativeDocumentMoniker": "MosadAPIServer\\Data\\MosadAPIServerContext.cs",
-              "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Data\\MosadAPIServerContext.cs",
-              "RelativeToolTip": "MosadAPIServer\\Data\\MosadAPIServerContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAmAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-21T13:56:13.047Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "AgentService.cs",
               "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Services\\AgentService.cs",
               "RelativeDocumentMoniker": "MosadAPIServer\\Services\\AgentService.cs",
               "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Services\\AgentService.cs",
               "RelativeToolTip": "MosadAPIServer\\Services\\AgentService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwA4AAAAHAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-21T13:54:15.017Z"
+              "WhenOpened": "2024-08-21T13:54:15.017Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 14,
               "Title": "MissionsController.cs",
               "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Controllers\\MissionsController.cs",
               "RelativeDocumentMoniker": "MosadAPIServer\\Controllers\\MissionsController.cs",
@@ -130,7 +189,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 15,
               "Title": "TargetsController.cs",
               "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Controllers\\TargetsController.cs",
               "RelativeDocumentMoniker": "MosadAPIServer\\Controllers\\TargetsController.cs",
@@ -142,20 +201,70 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "AgentsController.cs",
               "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Controllers\\AgentsController.cs",
               "RelativeDocumentMoniker": "MosadAPIServer\\Controllers\\AgentsController.cs",
               "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Controllers\\AgentsController.cs",
               "RelativeToolTip": "MosadAPIServer\\Controllers\\AgentsController.cs",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAwwEIAAAAyAAAA",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAwwDoAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-21T13:32:30.64Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
+              "Title": "Agent.cs",
+              "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Models\\Agent.cs",
+              "RelativeDocumentMoniker": "MosadAPIServer\\Models\\Agent.cs",
+              "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Models\\Agent.cs",
+              "RelativeToolTip": "MosadAPIServer\\Models\\Agent.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBEAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T13:18:59.496Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Mission.cs",
+              "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Models\\Mission.cs",
+              "RelativeDocumentMoniker": "MosadAPIServer\\Models\\Mission.cs",
+              "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Models\\Mission.cs",
+              "RelativeToolTip": "MosadAPIServer\\Models\\Mission.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T13:24:48.664Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "MosadAPIServerContext.cs",
+              "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Data\\MosadAPIServerContext.cs",
+              "RelativeDocumentMoniker": "MosadAPIServer\\Data\\MosadAPIServerContext.cs",
+              "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Data\\MosadAPIServerContext.cs",
+              "RelativeToolTip": "MosadAPIServer\\Data\\MosadAPIServerContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T13:56:13.047Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "MissionStatus.cs",
+              "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Enums\\MissionStatus.cs",
+              "RelativeDocumentMoniker": "MosadAPIServer\\Enums\\MissionStatus.cs",
+              "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Enums\\MissionStatus.cs",
+              "RelativeToolTip": "MosadAPIServer\\Enums\\MissionStatus.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T14:03:31.844Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Program.cs",
               "RelativeDocumentMoniker": "MosadAPIServer\\Program.cs",
@@ -167,43 +276,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Location.cs",
-              "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\ModelsHelpers\\Location.cs",
-              "RelativeDocumentMoniker": "MosadAPIServer\\ModelsHelpers\\Location.cs",
-              "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\ModelsHelpers\\Location.cs",
-              "RelativeToolTip": "MosadAPIServer\\ModelsHelpers\\Location.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-21T13:29:48.398Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Mission.cs",
-              "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Models\\Mission.cs",
-              "RelativeDocumentMoniker": "MosadAPIServer\\Models\\Mission.cs",
-              "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Models\\Mission.cs",
-              "RelativeToolTip": "MosadAPIServer\\Models\\Mission.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-21T13:24:48.664Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Target.cs",
               "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Models\\Target.cs",
               "RelativeDocumentMoniker": "MosadAPIServer\\Models\\Target.cs",
               "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Models\\Target.cs",
               "RelativeToolTip": "MosadAPIServer\\Models\\Target.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAqAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-21T13:20:05.314Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "AgentStatus.cs",
               "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Enums\\AgentStatus.cs",
               "RelativeDocumentMoniker": "MosadAPIServer\\Enums\\AgentStatus.cs",
@@ -212,18 +297,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-21T13:19:05.646Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Agent.cs",
-              "DocumentMoniker": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Models\\Agent.cs",
-              "RelativeDocumentMoniker": "MosadAPIServer\\Models\\Agent.cs",
-              "ToolTip": "C:\\Users\\YaakovGottlib\\source\\repos\\MosadAPIServer\\MosadAPIServer\\Models\\Agent.cs",
-              "RelativeToolTip": "MosadAPIServer\\Models\\Agent.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBEAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-21T13:18:59.496Z"
             }
           ]
         }

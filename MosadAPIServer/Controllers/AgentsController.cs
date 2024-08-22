@@ -12,7 +12,7 @@ using MosadAPIServer.Services;
 
 namespace MosadAPIServer.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AgentsController : ControllerBase
     {
@@ -32,39 +32,26 @@ namespace MosadAPIServer.Controllers
             return await _context.Agent.ToListAsync();
         }
 
-        // GET: api/Agents/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Agent>> GetAgent(int id)
+       
+
+
+        // POST: api/Agents
+        [HttpPost]
+        public async Task<ActionResult> PostAgent([FromBody] string nickname , [FromBody] string photo_url)
         {
-            var agent = await _context.Agent.FindAsync(id);
-
-            if (agent == null)
-            {
-                return NotFound();
-            }
-
-            return agent;
+            var newAgent = new Agent() { NickName = nickname,PhotoUrl=photo_url};
+            _context.Agent.Add(newAgent);
+            await _context.SaveChangesAsync();
+            return Created(nameof(PostAgent), new { id = newAgent.Id });
         }
 
-        // PUT: api/Agents/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api/Agents/5/pin
         [HttpPut("{id}/pin")]
         public async Task<IActionResult> PutAgent(int id, Location pinLocation)
         {
-            //_agentService.PinLocatin(id, pinLocation);
-
-            var agent = await _context.Agent.FindAsync(id);
-
-            if (agent == null)
-            {
-                return NotFound();
-            }
-
-            _context.Entry(agent).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _agentService.PinLocatinAsync(id, pinLocation);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -77,36 +64,41 @@ namespace MosadAPIServer.Controllers
                     throw;
                 }
             }
-
-            return NoContent();
-        }
-
-        // POST: api/Agents
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Agent>> PostAgent(Agent agent)
-        {
-            _context.Agent.Add(agent);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetAgent", new { id = agent.Id }, agent);
-        }
-
-        // DELETE: api/Agents/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAgent(int id)
-        {
-            var agent = await _context.Agent.FindAsync(id);
-            if (agent == null)
+            catch (NullReferenceException ex) 
             {
                 return NotFound();
             }
 
-            _context.Agent.Remove(agent);
-            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        // PUT: api/Agents/5/move
+        [HttpPut("{id}/move")]
+        public async Task<IActionResult> MoveAgent(int id , [FromBody]string direction)
+        {
+            try
+            {
+                await _agentService.MoveAsync(id, direction);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AgentExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            catch (NullReferenceException ex)
+            {
+                return NotFound();
+            }
 
             return NoContent();
         }
+
 
         private bool AgentExists(int id)
         {
