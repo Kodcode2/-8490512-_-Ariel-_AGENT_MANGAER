@@ -5,7 +5,9 @@ namespace MosadAPIServer.Services
 {
     static public class DirectionsService
     {
-        private static const int Bounds = 200;
+        private static readonly Location MaxBound = new Location(200,200);
+        private static readonly Location MinBound = new Location(0, 0);
+
         static readonly public Dictionary<string, Location> _directions = new Dictionary<string, Location>()
         {
             {"s" , new Location() { X =  0, Y =  0 }},
@@ -32,14 +34,16 @@ namespace MosadAPIServer.Services
             _ => throw new Exception("")
         };
 
-        public static Location Move(Location src , string dir)
+        public static Location? Move(Location src , string dir)
         {
-           return src + GetDirectionFromString(dir);
+            var newLocation = src + GetDirectionFromString(dir);
+           return newLocation > MinBound && newLocation < MaxBound? newLocation : null ;
         }
 
         public static Location MoveTowards(Location src, Location target)
         {
             throw new NotImplementedException();
         }
+
     }
 }

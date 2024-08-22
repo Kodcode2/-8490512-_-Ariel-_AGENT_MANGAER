@@ -14,8 +14,8 @@ namespace MosadAPIServer.Models
     {
         public int Id { get; set; }
         public string PhotoUrl { get; set; }
-        public int? LocationX { get; set; }
-        public int? LocationY { get; set; }
+        public int? LocationX { get; set; } = null;
+        public int? LocationY { get; set; } = null;
         public string NickName { get; set; }
         public AgentStatus Status { get; set; } = AgentStatus.Idle;
         public int TotalKills { get; set; } = 0;
@@ -28,9 +28,9 @@ namespace MosadAPIServer.Models
             NickName = agentDTO.nickname;
         }
 
-        public Location GetLocation()
+        public Location? GetLocation()
         {
-            return new Location(LocationX ?? 0,LocationY ?? 0);
+            return new Location(LocationX ,LocationY );
         }
         public void SetLocation(Location newLocation)
         {

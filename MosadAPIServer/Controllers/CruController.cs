@@ -51,7 +51,7 @@ namespace MosadAPIServer.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IsExists(id))
+                if (!_ModelService.IsExists(id))
                 {
                     return NotFound();
                 }
@@ -63,6 +63,10 @@ namespace MosadAPIServer.Controllers
             catch (NullReferenceException ex)
             {
                 return NotFound();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
             }
 
             return NoContent();
@@ -78,7 +82,7 @@ namespace MosadAPIServer.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IsExists(id))
+                if (!_ModelService.IsExists(id))
                 {
                     return NotFound();
                 }
@@ -96,10 +100,7 @@ namespace MosadAPIServer.Controllers
         }
 
 
-        private bool IsExists(int id)
-        {
-            return _context.Agent.Any(e => e.Id == id);
-        }
+       
     }
 }
 

@@ -9,6 +9,7 @@ namespace MosadAPIServer.Services
         public Task<int> CreateAsync(DTO DTOModel);
         public Task PinLocatinAsync(int id, Location pinLocation);
         public Task MoveAsync(int id , string dir);
-        public bool IsExist(int id); 
+        public bool IsExists(int id);
+        
     }
 }

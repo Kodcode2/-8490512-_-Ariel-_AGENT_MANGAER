@@ -7,13 +7,15 @@ using MosadAPIServer.Enums;
 
 namespace MosadAPIServer.Services
 {
-    public class AgentService : ICruService<Agent,AgentDTO>
+    public class AgentService : ICruService<Agent, AgentDTO>
     {
         private readonly MosadAPIServerContext _context;
+        private readonly MissionService _missionService;
 
-        public AgentService(MosadAPIServerContext context)
+        public AgentService(MosadAPIServerContext context, MissionService missionService)
         {
             _context = context;
+            _missionService = missionService;
         }
 
         public async Task<int> CreateAsync(AgentDTO agentDTO)
@@ -32,30 +34,38 @@ namespace MosadAPIServer.Services
 
 
 
-        public Task MoveAsync(int id, string dir)
+        public async Task MoveAsync(int id, string dir)
         {
-            var agent = _context.Agent.Find(id);
-            Location newLocation = agent.GetLocation();//if agent null the controller catches
+            var agent = _context.Agent.Find(id);  
 
-            if (agent.Status == AgentStatus.Idle)
-            {
-                newLocation = DirectionsService.Move(agent.GetLocation(), dir); 
+            if (agent.Status == AgentStatus.Active)
+                throw new InvalidOperationException("cannot move active agent");
+      
+            Location? newLocation = DirectionsService.Move(agent.GetLocation(), dir);
 
-            }
-            else if (agent.Status != AgentStatus.Active)
-            {
-                var target = _context.Agent.Where(a=>a.Id == id).Include(a=>a.Missions.Where(m=>m.Status == MissionStatus.Assigned) ?? new List<Mission>());
-                newLocation = DirectionsService.MoveTowards(agent.GetLocation(), dir);
-            }
+            if (newLocation == null)
+                throw new InvalidOperationException("cannot move beyond bounds.");
             
             agent.SetLocation(newLocation);
 
+            _context.Entry(agent).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
 
+            // no await
+            _missionService.IdleAgentMoved(agent.Id);
         }
+
+        
+
 
         public async Task PinLocatinAsync(int id, Location pinLocation)
         {
+
+
             var agent = await _context.Agent.FindAsync(id);
+
+            if (agent.GetLocation() != null)
+                throw new InvalidOperationException("cannot pin pinned agent.");
 
             if (agent == null)
             {
@@ -64,12 +74,14 @@ namespace MosadAPIServer.Services
 
             _context.Entry(agent).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            _missionService.IdleAgentMoved(agent.Id);
         }
 
-        public bool IsExist(int id)
+        public bool IsExists(int id)
         {
             return _context.Agent.Any(e => e.Id == id);
         }
-       
+
+        
     }
 }

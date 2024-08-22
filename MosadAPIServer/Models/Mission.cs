@@ -12,10 +12,14 @@ namespace MosadAPIServer.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        #region foreign_keys
         public int AgentId { get; set; }
         public Agent? Agent { get; set; }
         public int TargetId { get; set; }
         public Target? Target { get; set; }
+        #endregion
+
         public DateTime? AssignedTime { get; set; }
         public MissionStatus Status { get; set; }
         public TimeSpan? Duration { get; set; }

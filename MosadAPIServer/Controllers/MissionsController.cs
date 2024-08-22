@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MosadAPIServer.Data;
 using MosadAPIServer.Models;
+using MosadAPIServer.Services;
 
 namespace MosadAPIServer.Controllers
 {
@@ -15,20 +16,22 @@ namespace MosadAPIServer.Controllers
     public class MissionsController : ControllerBase
     {
         private readonly MosadAPIServerContext _context;
+        private readonly MissionService _missionService;
 
-        public MissionsController(MosadAPIServerContext context)
+        public MissionsController(MosadAPIServerContext context , MissionService missionService)
         {
             _context = context;
+            _missionService = missionService;
         }
 
-        // GET: api/Missions
+        // GET: Missions
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Mission>>> GetMission()
         {
             return await _context.Mission.ToListAsync();
         }
 
-        // GET: api/Missions/5
+        // GET: Missions/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Mission>> GetMission(int id)
         {
@@ -42,7 +45,7 @@ namespace MosadAPIServer.Controllers
             return mission;
         }
 
-        // PUT: api/Missions/5
+        // PUT: Missions/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMission(int id, Mission mission)
@@ -73,32 +76,17 @@ namespace MosadAPIServer.Controllers
             return NoContent();
         }
 
-        // POST: api/Missions
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Mission>> PostMission(Mission mission)
-        {
-            _context.Mission.Add(mission);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMission", new { id = mission.Id }, mission);
+        // POST: Missions/update
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateMissions()
+        {
+            _missionService.UpdateMissions();
+            return Ok();
         }
 
-        // DELETE: api/Missions/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMission(int id)
-        {
-            var mission = await _context.Mission.FindAsync(id);
-            if (mission == null)
-            {
-                return NotFound();
-            }
 
-            _context.Mission.Remove(mission);
-            await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
 
         private bool MissionExists(int id)
         {

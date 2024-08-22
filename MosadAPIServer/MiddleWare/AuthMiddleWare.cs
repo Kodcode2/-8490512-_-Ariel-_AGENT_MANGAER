@@ -17,7 +17,6 @@ namespace MosadAPIServer.MiddleWare
         }
         public async Task InvokeAsync(HttpContext context)
         {
-           
             // Call the next delegate/middleware in the pipeline.
             await _next(context);
         }
