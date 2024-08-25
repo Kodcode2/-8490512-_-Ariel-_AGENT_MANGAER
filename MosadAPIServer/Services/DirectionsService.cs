@@ -14,7 +14,7 @@ namespace MosadAPIServer.Services
 
         private static Location GetDirectionFromString(string dir) => dir switch
         {
-            "s" => new Location() { X = 0, Y = 0 },
+            "s" => new Location() { X = 0, Y = 1 },
             "e" => new Location() { X = 1, Y = 0 },
             "n" => new Location() { X = 0, Y = -1 },
             "w" => new Location() { X = -1, Y = 0 },
@@ -30,7 +30,7 @@ namespace MosadAPIServer.Services
             
            
             var newLocation = src + GetDirectionFromString(dir);
-            return newLocation > MinBound && newLocation < MaxBound? newLocation :  throw new OutOfRangeMoveException() ;
+            return newLocation >= MinBound && newLocation <= MaxBound? newLocation :  throw new OutOfRangeMoveException() ;
             
         }
 

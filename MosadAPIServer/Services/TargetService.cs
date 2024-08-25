@@ -78,5 +78,10 @@ namespace MosadAPIServer.Services
         {
             return _context.Target.Any(e => e.Id == id);
         }
+
+        public async Task<Target> GetById(int id)
+        {
+            return await _context.Target.FindAsync(id);
+        }
     }
 }

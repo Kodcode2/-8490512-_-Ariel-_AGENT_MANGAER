@@ -31,31 +31,39 @@ namespace MosadAPIServer.Controllers
 
         // POST: /T
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetAgent(int id)
+        public async Task<ActionResult> GetById(int id)
         {
             if (id == null) { return BadRequest("wrong id"); }
 
-            var agent = _context.Agent.Find(id);
-            if (agent == null) {
-                return NotFound();
+            try
+            {
+                var item = await _ModelService.GetById(id);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+                return Ok(item);
             }
-            return Ok(agent);
+            catch (Exception ex) { return NotFound(); }
+           
+            
+            
         }
 
 
         // POST: /T
         [HttpPost("")]
-        public async Task<ActionResult> PostAgent(DTO dtomodel)
+        public async Task<ActionResult> Create(DTO dtomodel)
         {
             if (!ModelState.IsValid) { return BadRequest("wrong body"); }
 
             int id = await _ModelService.CreateAsync(dtomodel);
-            return Created(nameof(GetAgent), new { id = id });
+            return Created(nameof(GetById), new { id = id });
         }
 
         // PUT: /T/5/pin
         [HttpPut("{id}/pin")]
-        public async Task<IActionResult> PutAgent(int id, PinDTO pinLocation)
+        public async Task<IActionResult> PinLocation(int id, PinDTO pinLocation)
         {
             if (id == null || !_ModelService.IsExists(id)) return NotFound("worng id");
             try
@@ -87,7 +95,7 @@ namespace MosadAPIServer.Controllers
 
         // PUT: /T/5/move
         [HttpPut("{id}/move")]
-        public async Task<IActionResult> MoveAgent(int id, [FromBody] string direction)
+        public async Task<IActionResult> Move(int id, MoveDirectionDTO directionDTO)
         {
             if (!ModelState.IsValid) { return BadRequest("wrong body"); }
 
@@ -95,7 +103,7 @@ namespace MosadAPIServer.Controllers
 
             try
             {
-                await _ModelService.MoveAsync(id, direction);
+                await _ModelService.MoveAsync(id, directionDTO.Direction);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -112,6 +120,7 @@ namespace MosadAPIServer.Controllers
             {
                 return NotFound();
             }
+            catch (InvalidOperationException ex) { return BadRequest(ex.Message); }
 
             return NoContent();
         }

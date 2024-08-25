@@ -3,6 +3,7 @@ using MosadAPIServer.Models;
 using MosadAPIServer.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace MosadAPIServer.Services
 {
@@ -22,21 +23,24 @@ namespace MosadAPIServer.Services
         /// <returns></returns>
         public async Task IdleAgentMoved(Agent agent)
         {
-            RemoveOutOfRangeCompatableTargets(agent);
+            await RemoveOutOfRangeCompatableTargets(agent);
 
-            CreateCompatableMissions(agent);
+            await CreateCompatableMissions(agent);
         }
 
         private async Task RemoveOutOfRangeCompatableTargets(Agent agent)
         {
             var uncompatibleMatches = _context.Mission.Include(m=>m.Agent).Include(m=>m.Target).Where(m=>
             m.AgentId == agent.Id   &&
-            m.Status == MissionStatus.OpenForAssignment &&
-            DirectionsService.AreOutOfAssignRange(m.Agent.GetLocation() , m.Target.GetLocation())
-            );
+            m.Status == MissionStatus.OpenForAssignment
+            )
+            .Where(m=>DirectionsService.AreOutOfAssignRange(m.Agent.GetLocation(), m.Target.GetLocation()));
 
-            _context.RemoveRange(uncompatibleMatches);
-            _context.SaveChanges();
+            if (!uncompatibleMatches.IsNullOrEmpty())
+            {
+                _context.RemoveRange(uncompatibleMatches);
+                await _context.SaveChangesAsync();
+            }
         }
 
         private async Task CreateCompatableMissions(Agent agent)
@@ -46,16 +50,21 @@ namespace MosadAPIServer.Services
 
             t.AssignedToMission == false                    &&
             t.Status            == TargetStatus.Alive       &&
-            t.GetLocation()     != null                     &&
-            DirectionsService.IsInRange(agent.GetLocation(), t.GetLocation())
-            ).ToList();
+            t.GetLocation()     != null                    
+            ).Where(t =>
+            DirectionsService.IsInRange(agent.GetLocation(), t.GetLocation())) .ToList();
+
+            var existingCompMissions = GetAllMatchingMissions(agent.Id);
+
+             
 
             foreach (var compatableTarget in compatableTargets)
             {
                 var newMission = new Mission() { AgentId = agent.Id, TargetId = compatableTarget.Id, Status = MissionStatus.OpenForAssignment };
-                _context.Add(newMission);
+                if (!existingCompMissions.Any(m=>m.TargetId == compatableTarget.Id))
+                    _context.Add(newMission);
             }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         private async Task CreateCompatableMissions(Target target)
@@ -65,6 +74,7 @@ namespace MosadAPIServer.Services
            DirectionsService.IsInRange(a.GetLocation(), target.GetLocation())
            ).ToList();
 
+
             foreach (var compatableAgent in compatableAgents)
             {
                 var newMission = new Mission() { 
@@ -72,7 +82,9 @@ namespace MosadAPIServer.Services
                     TargetId = target.Id,
                     Status = MissionStatus.OpenForAssignment };
 
-                _context.Add(newMission);
+                var existingCompMissions = GetAllMatchingMissions(compatableAgent.Id);
+                if (!existingCompMissions.Any(m => m.TargetId == target.Id))
+                    _context.Add(newMission);
             }
             _context.SaveChanges();
         }
@@ -94,11 +106,11 @@ namespace MosadAPIServer.Services
             if(target.Status == TargetStatus.Terminated  ) return;
             if (target.AssignedToMission)
             {
-                AssignedTargetMoved(target);
+                await AssignedTargetMoved(target);
                 return;
             }
 
-            CreateCompatableMissions(target);
+            await CreateCompatableMissions(target);
         }
 
         private async Task AssignedTargetMoved(Target target)

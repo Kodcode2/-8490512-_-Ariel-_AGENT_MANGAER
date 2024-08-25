@@ -18,8 +18,12 @@ namespace MosadAPIServer.ModelsHelpers
         public static Location operator -(Location left, Location right) => new Location() { X = left.X - right.X, Y = left.Y - right.Y };
         public static bool operator >(Location left, Location right) =>  left.X > right.X && left.Y > right.Y;
         public static bool operator <(Location left, Location right) => left.X < right.X && left.Y < right.Y;
+        public static bool operator >=(Location left, Location right) => left.X >= right.X && left.Y >= right.Y;
+        public static bool operator <=(Location left, Location right) => left.X <= right.X && left.Y <= right.Y;
         public static bool operator <(Location left, decimal right) => left.X < right && left.Y < right;
         public static bool operator >(Location left, decimal right) => left.X > right && left.Y > right;
+
+       
 
         public static bool IsInRange(Location location1, Location location2, int assignmentRange)
         {

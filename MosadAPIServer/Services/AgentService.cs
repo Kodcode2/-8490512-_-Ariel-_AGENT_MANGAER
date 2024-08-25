@@ -33,7 +33,7 @@ namespace MosadAPIServer.Services
             return await _context.Agent.ToListAsync();
         }
 
-
+       
 
         public async Task MoveAsync(int id, string dir)
         {
@@ -57,7 +57,7 @@ namespace MosadAPIServer.Services
 
 
             // no await
-            _missionService.IdleAgentMoved(agent);
+            await _missionService.IdleAgentMoved(agent);
         }
 
         
@@ -94,6 +94,9 @@ namespace MosadAPIServer.Services
             return _context.Agent.Any(e => e.Id == id);
         }
 
-        
+        public async Task<Agent> GetById(int id)
+        {
+            return await _context.Agent.FindAsync(id);
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace MosadAPIServer.Controllers
         }
 
         // GET: Missions
-        [HttpGet("all")]
+        [HttpGet("")]
         public async Task<ActionResult<IEnumerable<Mission>>> GetMission(string? status)
         {
             return Ok(await _missionService.getAllMissions(status));
