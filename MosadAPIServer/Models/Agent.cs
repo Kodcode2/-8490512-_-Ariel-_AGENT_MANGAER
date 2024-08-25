@@ -19,6 +19,8 @@ namespace MosadAPIServer.Models
         public string NickName { get; set; }
         public AgentStatus Status { get; set; } = AgentStatus.Idle;
         public int TotalKills { get; set; } = 0;
+
+        [JsonIgnore]
         public List<Mission>? Missions { get; set; }
 
         public Agent() { }
@@ -30,6 +32,8 @@ namespace MosadAPIServer.Models
 
         public Location? GetLocation()
         {
+            if (LocationX == null || LocationY == null) return null;
+
             return new Location(LocationX ,LocationY );
         }
         public void SetLocation(Location newLocation)

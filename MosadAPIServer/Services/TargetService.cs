@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MosadAPIServer.Data;
 using MosadAPIServer.DTO;
+using MosadAPIServer.Exceptions;
 using MosadAPIServer.Models;
 using MosadAPIServer.ModelsHelpers;
 
@@ -39,28 +40,39 @@ namespace MosadAPIServer.Services
             if (target.Status == Enums.TargetStatus.Terminated)
                 throw new InvalidOperationException("cannot move a teminated target");
 
-            Location? newLocation = DirectionsService.Move(target.GetLocation(), dir);
-            if (newLocation == null)
-                throw new InvalidOperationException("cannot move beyond bounds");
+            Location? newLocation;
+            try
+            {
+                newLocation = DirectionsService.Move(target.GetLocation(), dir);
 
+            }
+            catch (Exception ex) { throw new InvalidOperationException(ex.Message); }
+           
             target.SetLocation(newLocation);
+
             _context.Entry(target).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             // no await
-            _missionService.TargetMoved(target.Id);
+            _missionService.TargetMoved(target);
         }
 
         public async Task PinLocatinAsync(int id, Location pinLocation)
         {
             var target = await _context.Target.FindAsync(id);
 
+            if (target.GetLocation() != null)
+                throw new InvalidOperationException("cannot pin pinned agent.");
+
             if (target == null)
             {
                 throw new NullReferenceException("target not found");
             }
 
+            target.SetLocation(pinLocation);
             _context.Entry(target).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+
+            _missionService.TargetMoved(target);
         }
         public bool IsExists(int id)
         {

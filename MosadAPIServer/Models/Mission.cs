@@ -11,7 +11,6 @@ namespace MosadAPIServer.Models
     public class Mission
     {
         public int Id { get; set; }
-        public string Name { get; set; }
 
         #region foreign_keys
         public int AgentId { get; set; }
@@ -20,8 +19,8 @@ namespace MosadAPIServer.Models
         public Target? Target { get; set; }
         #endregion
 
-        public DateTime? AssignedTime { get; set; }
-        public MissionStatus Status { get; set; }
+        public DateTime? AssignedTime { get; set; } = null;
+        public MissionStatus Status { get; set; } = MissionStatus.OpenForAssignment;
         public TimeSpan? Duration { get; set; }
         public TimeSpan? TimeToKill { get; set; }
         

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MosadAPIServer.Data;
+using MosadAPIServer.MiddleWare;
 using MosadAPIServer.Services;
 
 namespace MosadAPIServer
@@ -17,13 +18,17 @@ namespace MosadAPIServer
             // Add services to the container.
             builder.Services.AddScoped<AgentService>();
             builder.Services.AddScoped<TargetService>();
+            builder.Services.AddScoped<MissionService>();
+            builder.Services.AddScoped<TokenService>();
             builder.Services.AddControllers();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            
             var app = builder.Build();
+            app.UseMiddleware<AuthMiddleWare>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

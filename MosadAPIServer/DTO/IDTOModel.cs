@@ -2,11 +2,10 @@
 
 namespace MosadAPIServer.DTO
 {
-    public class IDTOModel
+    public interface IDTOModel
     {
+        public string Token { get; set; }
         [JsonPropertyName("photo_url")]
         public string PhotoUrl { get; set; }
-        [JsonPropertyName("token")]
-        public string Token { get; set; }
     }
 }

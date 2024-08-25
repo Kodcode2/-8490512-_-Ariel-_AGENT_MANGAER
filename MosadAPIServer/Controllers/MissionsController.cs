@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,17 +19,17 @@ namespace MosadAPIServer.Controllers
         private readonly MosadAPIServerContext _context;
         private readonly MissionService _missionService;
 
-        public MissionsController(MosadAPIServerContext context , MissionService missionService)
+        public MissionsController(MosadAPIServerContext context, MissionService missionService)
         {
             _context = context;
             _missionService = missionService;
         }
 
         // GET: Missions
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Mission>>> GetMission()
+        [HttpGet("all")]
+        public async Task<ActionResult<IEnumerable<Mission>>> GetMission(string? status)
         {
-            return await _context.Mission.ToListAsync();
+            return Ok(await _missionService.getAllMissions(status));
         }
 
         // GET: Missions/5
@@ -46,7 +47,6 @@ namespace MosadAPIServer.Controllers
         }
 
         // PUT: Missions/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMission(int id, Mission mission)
         {
@@ -55,11 +55,14 @@ namespace MosadAPIServer.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(mission).State = EntityState.Modified;
+            if (!MissionExists(id))
+            {
+                return NotFound();
+            }
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _missionService.AssignMission(mission);//_context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {

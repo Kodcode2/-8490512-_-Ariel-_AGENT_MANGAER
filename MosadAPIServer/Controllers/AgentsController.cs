@@ -21,7 +21,7 @@ namespace MosadAPIServer.Controllers
 
         public AgentsController(MosadAPIServerContext context, AgentService agentService)
             : base(context, agentService) { }
-       
 
+       
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using MosadAPIServer.DTO;
+using MosadAPIServer.Exceptions;
 using MosadAPIServer.Services;
 
 namespace MosadAPIServer.Controllers
@@ -7,25 +9,21 @@ namespace MosadAPIServer.Controllers
     public class HomeController : Controller
     {
 
-        private readonly TokenService _tokenService;
 
-        public HomeController(TokenService tokenService)
-        {
-            _tokenService = tokenService;
-        }
+        public HomeController(TokenService tokenService) { }
 
         // POST: api/T
         [HttpPost("login")]
-        public async Task<ActionResult> Login([FromBody] string id)
+        public async Task<ActionResult> Login([FromBody] IdForTokenDTO idDTO)
         {
             try
             {
-                var token = _tokenService.GenerateToken(id);
+                var token = TokenService.GenerateToken(idDTO.Id);
                 return Ok(new { token=token });
 
-            }catch(InvalidDataException ex)
+            }catch(UnauthorizedIdException ex)
             {
-                return BadRequest(ex.Message);
+                return Unauthorized(ex.Message);
             }
         }
     }

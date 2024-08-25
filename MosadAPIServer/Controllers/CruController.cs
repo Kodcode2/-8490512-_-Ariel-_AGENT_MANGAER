@@ -13,8 +13,8 @@ namespace MosadAPIServer.Controllers
     [ApiController]
     public abstract class CruController<T,DTO>  : ControllerBase where DTO  :IDTOModel where T : IModel
     {
-        private readonly MosadAPIServerContext _context;
-        private readonly ICruService<T,DTO> _ModelService;
+        protected readonly MosadAPIServerContext _context;
+        protected readonly ICruService<T,DTO> _ModelService;
 
         public CruController(MosadAPIServerContext context, ICruService<T, DTO> service)
         {
@@ -22,29 +22,42 @@ namespace MosadAPIServer.Controllers
             _ModelService = service;
         }
 
-        // GET: api/T
+        // GET: /T
         [HttpGet]
         public async Task<ActionResult<IEnumerable<T>>> GetAll()
         {
             return await _ModelService.GetAllAsync();
         }
 
-
-
-
-        // POST: api/T
-        [HttpPost]
-        public async Task<ActionResult> PostAgent([FromBody] DTO dtomodel)
+        // POST: /T
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetAgent(int id)
         {
-            int id = await _ModelService.CreateAsync(dtomodel);
-            return Created(nameof(PostAgent), new { id = id });
+            if (id == null) { return BadRequest("wrong id"); }
+
+            var agent = _context.Agent.Find(id);
+            if (agent == null) {
+                return NotFound();
+            }
+            return Ok(agent);
         }
 
-        // PUT: api/T/5/pin
-        [HttpPut("{id}/pin")]
-        public async Task<IActionResult> PutAgent(int id, Location pinLocation)
+
+        // POST: /T
+        [HttpPost("")]
+        public async Task<ActionResult> PostAgent(DTO dtomodel)
         {
-            if (id == null) return BadRequest("wrong id");
+            if (!ModelState.IsValid) { return BadRequest("wrong body"); }
+
+            int id = await _ModelService.CreateAsync(dtomodel);
+            return Created(nameof(GetAgent), new { id = id });
+        }
+
+        // PUT: /T/5/pin
+        [HttpPut("{id}/pin")]
+        public async Task<IActionResult> PutAgent(int id, PinDTO pinLocation)
+        {
+            if (id == null || !_ModelService.IsExists(id)) return NotFound("worng id");
             try
             {
                 await _ModelService.PinLocatinAsync(id, pinLocation);
@@ -72,10 +85,14 @@ namespace MosadAPIServer.Controllers
             return NoContent();
         }
 
-        // PUT: api/T/5/move
+        // PUT: /T/5/move
         [HttpPut("{id}/move")]
         public async Task<IActionResult> MoveAgent(int id, [FromBody] string direction)
         {
+            if (!ModelState.IsValid) { return BadRequest("wrong body"); }
+
+            if (id == null ||!_ModelService.IsExists(id)) return NotFound("worng id");
+
             try
             {
                 await _ModelService.MoveAsync(id, direction);

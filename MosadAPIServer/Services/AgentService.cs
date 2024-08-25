@@ -4,6 +4,7 @@ using MosadAPIServer.Data;
 using MosadAPIServer.DTO;
 using MosadAPIServer.Models;
 using MosadAPIServer.Enums;
+using MosadAPIServer.Exceptions;
 
 namespace MosadAPIServer.Services
 {
@@ -40,29 +41,38 @@ namespace MosadAPIServer.Services
 
             if (agent.Status == AgentStatus.Active)
                 throw new InvalidOperationException("cannot move active agent");
-      
-            Location? newLocation = DirectionsService.Move(agent.GetLocation(), dir);
 
-            if (newLocation == null)
-                throw new InvalidOperationException("cannot move beyond bounds.");
-            
+            Location? newLocation;
+            try
+            {
+                 newLocation = DirectionsService.Move(agent.GetLocation(), dir);
+               
+            }
+            catch (Exception ex) { throw new InvalidOperationException(ex.Message); }
+
             agent.SetLocation(newLocation);
 
             _context.Entry(agent).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
+
             // no await
-            _missionService.IdleAgentMoved(agent.Id);
+            _missionService.IdleAgentMoved(agent);
         }
 
         
 
-
-        public async Task PinLocatinAsync(int id, Location pinLocation)
+        /// <summary>
+        /// Pins an agent - sets its location and calls the IdleAgentMoved to calculate compatibleMissions
+        /// </summary>
+        /// <param name="agentId"></param>
+        /// <param name="pinLocation"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        /// <exception cref="NullReferenceException"></exception>
+        public async Task PinLocatinAsync(int agentId, Location pinLocation)
         {
-
-
-            var agent = await _context.Agent.FindAsync(id);
+            var agent = await _context.Agent.FindAsync(agentId);
 
             if (agent.GetLocation() != null)
                 throw new InvalidOperationException("cannot pin pinned agent.");
@@ -72,9 +82,11 @@ namespace MosadAPIServer.Services
                 throw new NullReferenceException("agent not found");
             }
 
+            agent.SetLocation(pinLocation);
             _context.Entry(agent).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            _missionService.IdleAgentMoved(agent.Id);
+
+            _missionService.IdleAgentMoved(agent);
         }
 
         public bool IsExists(int id)
