@@ -1,0 +1,81 @@
+﻿@model IEnumerable<MosadMvcServer.DTO.AgentWithMissionIdDTO>
+
+@{
+    ViewData["Title"] = "AgentsStat";
+}
+
+<h1>AgentsStat</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AssignedMissionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeToKill)
+            </th>
+            <th> 
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhotoUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationX)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NickName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalKills)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @if (@item.AssignedMissionId != null)
+                {
+                    @Html.ActionLink("Mission details", "MissionDetails", new { id = item.AssignedMissionId});
+                }
+                @Html.DisplayFor(modelItem => item.AssignedMissionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeToKill)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhotoUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationX)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NickName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalKills)
+            </td>
+           
+        </tr>
+}
+    </tbody>
+</table>
