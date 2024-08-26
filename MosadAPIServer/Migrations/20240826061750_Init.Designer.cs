@@ -12,7 +12,7 @@ using MosadAPIServer.Data;
 namespace MosadAPIServer.Migrations
 {
     [DbContext(typeof(MosadAPIServerContext))]
-    [Migration("20240825093309_Init")]
+    [Migration("20240826061750_Init")]
     partial class Init
     {
         /// <inheritdoc />

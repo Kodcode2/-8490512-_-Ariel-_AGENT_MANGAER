@@ -52,7 +52,7 @@ namespace MosadAPIServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Agent", (string)null);
+                    b.ToTable("Agent");
                 });
 
             modelBuilder.Entity("MosadAPIServer.Models.Mission", b =>
@@ -87,7 +87,7 @@ namespace MosadAPIServer.Migrations
 
                     b.HasIndex("TargetId");
 
-                    b.ToTable("Mission", (string)null);
+                    b.ToTable("Mission");
                 });
 
             modelBuilder.Entity("MosadAPIServer.Models.Target", b =>
@@ -124,7 +124,7 @@ namespace MosadAPIServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Target", (string)null);
+                    b.ToTable("Target");
                 });
 
             modelBuilder.Entity("MosadAPIServer.Models.Mission", b =>

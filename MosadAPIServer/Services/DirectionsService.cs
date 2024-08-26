@@ -43,7 +43,7 @@ namespace MosadAPIServer.Services
                : 0, 
                src.Y < target.Y ? 1 
                : src.Y > target.Y ? -1 
-               : 0);     
+               : 0) + src;     
         }
 
         public static bool IsInRange(Location location1, Location location2)

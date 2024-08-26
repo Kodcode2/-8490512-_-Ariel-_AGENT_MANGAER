@@ -48,43 +48,39 @@ namespace MosadAPIServer.Controllers
 
         // PUT: Missions/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMission(int id, Mission mission)
+        public async Task<IActionResult> PutMission(int id)
         {
-            if (id != mission.Id)
-            {
-                return BadRequest();
-            }
-
+           
             if (!MissionExists(id))
-            {
                 return NotFound();
-            }
+
 
             try
             {
-                await _missionService.AssignMission(mission);//_context.SaveChangesAsyncAsync();
+                await _missionService.AssignMission(id);
             }
             catch (DbUpdateConcurrencyException)
             {
                 if (!MissionExists(id))
-                {
                     return NotFound();
-                }
                 else
-                {
                     throw;
-                }
+            }
+            catch (ArgumentNullException)
+            {
+                return NotFound();
             }
 
             return NoContent();
         }
 
 
+
         // POST: Missions/update
         [HttpPut("update")]
         public async Task<IActionResult> UpdateMissions()
         {
-            _missionService.UpdateMissions();
+            await _missionService.UpdateMissions();
             return Ok();
         }
 
