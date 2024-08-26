@@ -56,7 +56,6 @@ namespace MosadAPIServer.Services
             await _context.SaveChangesAsync();
 
 
-            // no await
             await _missionService.IdleAgentMoved(agent);
         }
 
@@ -86,7 +85,7 @@ namespace MosadAPIServer.Services
             _context.Entry(agent).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            _missionService.IdleAgentMoved(agent);
+            await _missionService.IdleAgentMoved(agent);
         }
 
         public bool IsExists(int id)

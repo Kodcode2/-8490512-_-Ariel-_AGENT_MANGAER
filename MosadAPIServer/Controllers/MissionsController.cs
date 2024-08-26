@@ -29,7 +29,7 @@ namespace MosadAPIServer.Controllers
         [HttpGet("")]
         public async Task<ActionResult<IEnumerable<Mission>>> GetMission(string? status)
         {
-            return Ok(await _missionService.getAllMissions(status));
+            return Ok(await _missionService.GetAllMissions(status));
         }
 
         // GET: Missions/5
@@ -62,7 +62,7 @@ namespace MosadAPIServer.Controllers
 
             try
             {
-                await _missionService.AssignMission(mission);//_context.SaveChangesAsync();
+                await _missionService.AssignMission(mission);//_context.SaveChangesAsyncAsync();
             }
             catch (DbUpdateConcurrencyException)
             {

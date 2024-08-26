@@ -44,7 +44,7 @@ namespace MosadAPIServer.Controllers
                 }
                 return Ok(item);
             }
-            catch (Exception ex) { return NotFound(); }
+            catch (Exception ) { return NotFound(); }
            
             
             
@@ -58,7 +58,7 @@ namespace MosadAPIServer.Controllers
             if (!ModelState.IsValid) { return BadRequest("wrong body"); }
 
             int id = await _ModelService.CreateAsync(dtomodel);
-            return Created(nameof(GetById), new { id = id });
+            return Created(nameof(GetById), new { id });
         }
 
         // PUT: /T/5/pin

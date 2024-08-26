@@ -52,8 +52,9 @@ namespace MosadAPIServer.Services
 
             _context.Entry(target).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            // no await
-            _missionService.TargetMoved(target);
+            
+
+            await _missionService.TargetMoved(target);
         }
 
         public async Task PinLocatinAsync(int id, Location pinLocation)
@@ -72,14 +73,14 @@ namespace MosadAPIServer.Services
             _context.Entry(target).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            _missionService.TargetMoved(target);
+            await _missionService.TargetMoved(target);
         }
         public bool IsExists(int id)
         {
             return _context.Target.Any(e => e.Id == id);
         }
 
-        public async Task<Target> GetById(int id)
+        public async Task<Target?> GetById(int id)
         {
             return await _context.Target.FindAsync(id);
         }

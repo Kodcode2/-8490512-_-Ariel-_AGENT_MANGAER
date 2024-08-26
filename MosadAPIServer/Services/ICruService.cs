@@ -7,7 +7,7 @@ namespace MosadAPIServer.Services
     {
         public Task<List<T>> GetAllAsync();
         public Task<int> CreateAsync(DTO DTOModel);
-        public Task<T> GetById(int id);
+        public Task<T?> GetById(int id);
         public Task PinLocatinAsync(int id, Location pinLocation);
         public Task MoveAsync(int id , string dir);
         public bool IsExists(int id);

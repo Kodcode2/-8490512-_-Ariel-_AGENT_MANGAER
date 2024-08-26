@@ -7,8 +7,8 @@ namespace MosadAPIServer.Services
     static public class DirectionsService
     {
         private static readonly int AssignmentRange = 200;
-        private static readonly Location MaxBound = new Location(1000,1000);
-        private static readonly Location MinBound = new Location(0, 0);
+        private static readonly Location MaxBound = new(1000,1000);
+        private static readonly Location MinBound = new (0, 0);
 
        
 

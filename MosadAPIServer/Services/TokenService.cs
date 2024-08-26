@@ -7,8 +7,7 @@ namespace MosadAPIServer.Services
 {
     public  class TokenService 
     {
-        public static readonly ConcurrentDictionary<string,AuthId> _tokenIdPairs =
-            new ConcurrentDictionary<string, AuthId>() ;
+        public static readonly ConcurrentDictionary<string, AuthId> _tokenIdPairs = [];
 
 
         public TokenService() 

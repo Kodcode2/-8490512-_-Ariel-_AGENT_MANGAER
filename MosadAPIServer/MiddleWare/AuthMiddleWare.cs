@@ -12,7 +12,8 @@ namespace MosadAPIServer.MiddleWare
 {
     public class AuthMiddleWare
     {
-        private static readonly ConcurrentDictionary<AuthId, List<string>> _AuthIdRoutesPairs = new ConcurrentDictionary<AuthId, List<string>>();
+        private static readonly ConcurrentDictionary<AuthId, List<string>> _AuthIdRoutesPairs = []; 
+            
         
         
 

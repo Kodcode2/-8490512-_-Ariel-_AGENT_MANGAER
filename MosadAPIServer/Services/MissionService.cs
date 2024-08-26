@@ -30,38 +30,53 @@ namespace MosadAPIServer.Services
 
         private async Task RemoveOutOfRangeCompatableTargets(Agent agent)
         {
-            var uncompatibleMatches = _context.Mission.Include(m=>m.Agent).Include(m=>m.Target).Where(m=>
-            m.AgentId == agent.Id   &&
-            m.Status == MissionStatus.OpenForAssignment
-            )
-            .Where(m=>DirectionsService.AreOutOfAssignRange(m.Agent.GetLocation(), m.Target.GetLocation()));
+            var uncompatibleMatches = await _context.Mission
+                .Include(m => m.Agent)
+                .Include(m => m.Target)
+                .Where(m =>
+            m.AgentId == agent.Id &&
+            m.Status == MissionStatus.OpenForAssignment 
+            ).ToListAsync();
 
-            if (!uncompatibleMatches.IsNullOrEmpty())
+            if (uncompatibleMatches.IsNullOrEmpty())
             {
-                _context.RemoveRange(uncompatibleMatches);
-                await _context.SaveChangesAsync();
+                return;
+            }
+
+            foreach (var m in uncompatibleMatches)
+            {
+                if (DirectionsService.AreOutOfAssignRange(m.Agent.GetLocation(), m.Target.GetLocation()))
+                {
+                    _context.RemoveRange(uncompatibleMatches);
+                    await _context.SaveChangesAsync();
+
+                }
+
             }
         }
 
         private async Task CreateCompatableMissions(Agent agent)
         {
-            var compatableTargets =
+            var compatableTargets = await
                 _context.Target.Where(t =>
 
             t.AssignedToMission == false                    &&
             t.Status            == TargetStatus.Alive       &&
-            t.GetLocation()     != null                    
-            ).Where(t =>
-            DirectionsService.IsInRange(agent.GetLocation(), t.GetLocation())) .ToList();
+            t.LocationX         != null                     &&
+            t.LocationY         != null 
+            ).ToListAsync();
 
-            var existingCompMissions = GetAllMatchingMissions(agent.Id);
+
+           
+            var existingCompMissions = await GetAllMatchingMissions(agent.Id);
 
              
 
-            foreach (var compatableTarget in compatableTargets)
+            foreach (var ct in compatableTargets)
             {
-                var newMission = new Mission() { AgentId = agent.Id, TargetId = compatableTarget.Id, Status = MissionStatus.OpenForAssignment };
-                if (!existingCompMissions.Any(m=>m.TargetId == compatableTarget.Id))
+                var newMission = new Mission() { AgentId = agent.Id, TargetId = ct.Id, Status = MissionStatus.OpenForAssignment };
+                if (!existingCompMissions.Any(m=>m.TargetId == ct.Id) &&
+                    DirectionsService.IsInRange(agent.GetLocation(), ct.GetLocation()))
                     _context.Add(newMission);
             }
             await _context.SaveChangesAsync();
@@ -69,10 +84,10 @@ namespace MosadAPIServer.Services
 
         private async Task CreateCompatableMissions(Target target)
         {
-            var compatableAgents = _context.Agent.Where(a =>
+            var compatableAgents = await _context.Agent.Where(a =>
            a.Status == AgentStatus.Idle &&
            DirectionsService.IsInRange(a.GetLocation(), target.GetLocation())
-           ).ToList();
+           ).ToListAsync();
 
 
             foreach (var compatableAgent in compatableAgents)
@@ -82,18 +97,18 @@ namespace MosadAPIServer.Services
                     TargetId = target.Id,
                     Status = MissionStatus.OpenForAssignment };
 
-                var existingCompMissions = GetAllMatchingMissions(compatableAgent.Id);
+                var existingCompMissions = await GetAllMatchingMissions(compatableAgent.Id);
                 if (!existingCompMissions.Any(m => m.TargetId == target.Id))
                     _context.Add(newMission);
             }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public List<Mission>  GetAllMatchingMissions(int agentId)
+        public async Task<List<Mission>>  GetAllMatchingMissions(int agentId)
         {
             if (!_context.Agent.Any(a => a.Id == agentId)) throw new Exception("wrong id");
 
-            return  _context.Mission.Where(m=>m.AgentId == agentId && m.Status == MissionStatus.OpenForAssignment).ToList();
+            return  await _context.Mission.Where(m=>m.AgentId == agentId && m.Status == MissionStatus.OpenForAssignment).ToListAsync();
         }
 
         /// <summary>
@@ -102,7 +117,7 @@ namespace MosadAPIServer.Services
         /// <param name="id">the target id</param>
         /// <exception cref="NotImplementedException"></exception>
         public async Task TargetMoved(Target target)
-        {
+        {//rmove old unnesesary
             if(target.Status == TargetStatus.Terminated  ) return;
             if (target.AssignedToMission)
             {
@@ -110,6 +125,7 @@ namespace MosadAPIServer.Services
                 return;
             }
 
+            //await removeOldCompatableMissions(target);
             await CreateCompatableMissions(target);
         }
 
@@ -121,7 +137,7 @@ namespace MosadAPIServer.Services
                 .Include(m => m.Agent)
                 .Where(m => m.TargetId == target.Id && m.Target.AssignedToMission).Single();
 
-            CheckKill(targetMission);   
+            await CheckKill(targetMission);   
         }
 
 
@@ -129,7 +145,7 @@ namespace MosadAPIServer.Services
         /// checks if the target an agent are on the same spot
         /// </summary>
         /// <param name="targetMission"> a mission with target an agent filled in it</param>
-        /// <exception cref="NotImplementedException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         private async Task CheckKill(Mission mission)
         {
             if (mission.Agent == null || mission.Target == null)
@@ -137,7 +153,7 @@ namespace MosadAPIServer.Services
 
             if(mission.Target.GetLocation() == mission.Agent.GetLocation())
             {// a kill was found
-                MissionFinished(mission);
+                await MissionFinished(mission);
             }
         }
 
@@ -157,7 +173,7 @@ namespace MosadAPIServer.Services
             mission.Agent.TotalKills++;
 
             _context.Entry(mission).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
 
@@ -183,20 +199,19 @@ namespace MosadAPIServer.Services
                 mission.TimeToKill = CalculateTimeToKill(mission.Agent, mission.Target);
                 _context.Update(mission);
             }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
        
 
-        internal async Task<IEnumerable<Mission>> getAllMissions(string? status)
+        internal async Task<IEnumerable<Mission>> GetAllMissions(string? status)
         {
             
-            
             if (Enum.TryParse<MissionStatus>(status, out var missionStatus))
-                return _context.Mission.Where(m=>m.Status == missionStatus).ToList();
+                return await _context.Mission.Where(m=>m.Status == missionStatus).ToListAsync();
            
            
-            return _context.Mission.ToList();
+            return await _context.Mission.ToListAsync();
         }
 
         internal async Task AssignMission(Mission mission)
@@ -219,10 +234,10 @@ namespace MosadAPIServer.Services
 
 
             _context.Entry(mission).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        private TimeSpan? CalculateTimeToKill(Agent agent , Target target)
+        private static TimeSpan? CalculateTimeToKill(Agent agent , Target target)
         {
             double tilesDis = DirectionsService.GetAirDistance(agent.GetLocation(), target.GetLocation());
             return new TimeSpan((int)(tilesDis / 5 ),0,0);

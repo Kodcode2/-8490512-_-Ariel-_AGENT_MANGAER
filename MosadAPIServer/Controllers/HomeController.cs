@@ -19,7 +19,7 @@ namespace MosadAPIServer.Controllers
             try
             {
                 var token = TokenService.GenerateToken(idDTO.Id);
-                return Ok(new { token=token });
+                return Ok(new { token });
 
             }catch(UnauthorizedIdException ex)
             {
