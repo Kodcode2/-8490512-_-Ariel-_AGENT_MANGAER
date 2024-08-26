@@ -112,6 +112,8 @@ namespace MosadAPIServer.Services
             return  await _context.Mission.Where(m=>m.AgentId == agentId && m.Status == MissionStatus.OpenForAssignment).ToListAsync();
         }
 
+       
+
         /// <summary>
         /// indicates that a target moved , runs some logic based on that
         /// </summary>
@@ -237,6 +239,11 @@ namespace MosadAPIServer.Services
             return await _context.Mission.ToListAsync();
         }
 
+        internal async Task<IEnumerable<Mission>> GetFullInfoMissions()
+        {
+            return await _context.Mission.Include(m=>m.Agent).Include(m=>m.Target).ToListAsync();
+        }
+
         internal async Task AssignMission(int missionId)
         {
             var mission = await _context.Mission.FindAsync(missionId);
@@ -253,6 +260,9 @@ namespace MosadAPIServer.Services
             //assign target to mission
             mission.Target.AssignedToMission = true;
 
+            // activate agent
+            mission.Agent.Status = AgentStatus.Active;
+
             // remove all compatable with same target id
             var missionList = _context.Mission.Include(m=>m.Agent).Include(m=>m.Target).
                 Where(m=>m.Id == mission.Id && m.TargetId == mission.TargetId && m.AgentId != mission.AgentId);
@@ -268,5 +278,7 @@ namespace MosadAPIServer.Services
             double tilesDis = DirectionsService.GetAirDistance(agent.GetLocation(), target.GetLocation());
             return new TimeSpan((int)(tilesDis / 5 ),0,0);
         }
+
+        
     }
 }

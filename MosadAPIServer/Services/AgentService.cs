@@ -5,6 +5,7 @@ using MosadAPIServer.DTO;
 using MosadAPIServer.Models;
 using MosadAPIServer.Enums;
 using MosadAPIServer.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MosadAPIServer.Services
 {
@@ -96,6 +97,23 @@ namespace MosadAPIServer.Services
         public async Task<Agent> GetById(int id)
         {
             return await _context.Agent.FindAsync(id);
+        }
+
+        internal async Task<IEnumerable<AgentWithMissionIdDTO>> GetAllAgentsWithMissionId()
+        {
+           var agents = await  _context.Agent.Include(a=>a.Missions).ToListAsync();   
+                            
+               
+
+            List<AgentWithMissionIdDTO> agentWithMissionId = [];
+
+            foreach (var agent in agents)
+            {
+                var assignedMission = agent?.Missions?.FirstOrDefault(m => m.Status == MissionStatus.Assigned);
+                agentWithMissionId.Add(new AgentWithMissionIdDTO
+                    (agent, assignedMission?.Id, assignedMission.TimeToKill));
+            }
+            return agentWithMissionId;
         }
     }
 }

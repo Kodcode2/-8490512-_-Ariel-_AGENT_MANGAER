@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MosadAPIServer.Data;
+using MosadAPIServer.DTO;
 using MosadAPIServer.Models;
 using MosadAPIServer.Services;
 
@@ -32,6 +33,13 @@ namespace MosadAPIServer.Controllers
             return Ok(await _missionService.GetAllMissions(status));
         }
 
+        // GET: FullInfoMissions
+        [HttpGet("fullInfo")]
+        public async Task<ActionResult<IEnumerable<Mission>>> GetFullInfoMissions()
+        {
+            return Ok(await _missionService.GetFullInfoMissions());
+        }
+
         // GET: Missions/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Mission>> GetMission(int id)
@@ -48,7 +56,7 @@ namespace MosadAPIServer.Controllers
 
         // PUT: Missions/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMission(int id)
+        public async Task<IActionResult> PutMission(int id , [FromBody]TokenDTO tokenDTO)
         {
            
             if (!MissionExists(id))

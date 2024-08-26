@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MosadAPIServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8d9ff29b7a6db3e6fe677acc7c4e1b14c7b867a3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e76bff1cabfbbbf70abba7f6089e7a20ae84fa46")]
 [assembly: System.Reflection.AssemblyProductAttribute("MosadAPIServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MosadAPIServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

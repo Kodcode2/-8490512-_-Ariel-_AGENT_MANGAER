@@ -15,10 +15,10 @@ namespace MosadAPIServer.Models
 
         #region foreign_keys
         public int AgentId { get; set; }
-        [JsonIgnore]
+       /* [JsonIgnore]*/
         public Agent? Agent { get; set; }
         public int TargetId { get; set; }
-        [JsonIgnore]
+       /* [JsonIgnore]*/
         public Target? Target { get; set; }
         #endregion
 

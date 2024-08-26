@@ -1,4 +1,5 @@
-﻿using MosadAPIServer.DTO;
+﻿using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
+using MosadAPIServer.DTO;
 using MosadAPIServer.Enums;
 using MosadAPIServer.Services;
 using Newtonsoft.Json;
@@ -38,21 +39,17 @@ namespace MosadAPIServer.MiddleWare
         }
         public async Task InvokeAsync(HttpContext context)
         {
-            //for debug perpuses
-            if (context.Request.Path.StartsWithSegments("/swagger", StringComparison.OrdinalIgnoreCase))
+            //for debug perpuses // allow login for all
+            if (context.Request.Path.StartsWithSegments("/swagger", StringComparison.OrdinalIgnoreCase) ||
+                context.Request.Path.StartsWithSegments("/login", StringComparison.OrdinalIgnoreCase) || 
+                    context.Request.Method == HttpMethod.Get.Method)
             {
                 await _next(context);
                 return;
             }
 
-            var path = context.Request.Path;
-            // allow login for all
-            if (context.Request.Path.StartsWithSegments("/login", StringComparison.OrdinalIgnoreCase))
-            {
-                await _next(context);
-                return;
-            }
-
+            
+            
             try
             {
                 // extract id 
@@ -73,7 +70,7 @@ namespace MosadAPIServer.MiddleWare
                 AuthId authId = TokenService._tokenIdPairs[token];
                 
             }
-            catch (Exception ex) {
+            catch (Exception) {
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 await context.Response.WriteAsync("missing token");
                 return ;

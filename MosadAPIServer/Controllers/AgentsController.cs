@@ -18,10 +18,24 @@ namespace MosadAPIServer.Controllers
     public class AgentsController : CruController<Agent, AgentDTO>
     {
 
-
+        private AgentService _agentService;
         public AgentsController(MosadAPIServerContext context, AgentService agentService)
-            : base(context, agentService) { }
+            : base(context, agentService) { 
+            _agentService = agentService;
+        }
 
-       
+        // GET: /agentsWithMissionId
+        [HttpGet("agentsWithMissionId")]
+        public async Task<ActionResult<IEnumerable<AgentWithMissionIdDTO>>> GetAllAgentsWithMissionId()
+        {
+            try
+            {
+                var list = await _agentService.GetAllAgentsWithMissionId();
+                return Ok(list);
+
+            }
+            catch (Exception ex) { return NotFound(); }
+
+        }
     }
 }

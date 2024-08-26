@@ -5,14 +5,17 @@ using System.Xml.Linq;
 
 namespace MosadAPIServer.Services
 {
-    public  class TokenService 
+    public class TokenService
     {
-        public static readonly ConcurrentDictionary<string, AuthId> _tokenIdPairs = [];
+        public static readonly ConcurrentDictionary<string, AuthId> _tokenIdPairs = new ConcurrentDictionary<string, AuthId>()
+        {
+            ["debug"] = AuthId.SimulationServer,
+        };
 
 
         public TokenService() 
         {
-            _tokenIdPairs["debug"] = AuthId.SimulationServer;
+            
         }
         public static string GenerateToken(string id)
         {
