@@ -10,10 +10,12 @@ namespace MosadMvcServer.Controllers
     public class HomeController : Controller
     {
         private readonly StatisticsService _statisticsService;
+        private readonly ActionService _actionService;
 
-        public HomeController( StatisticsService statisticsService)
+        public HomeController( StatisticsService statisticsService , ActionService actionService)
         {
             _statisticsService = statisticsService;
+            _actionService = actionService;
         }
 
         public IActionResult Index(string? errors)
@@ -112,13 +114,28 @@ namespace MosadMvcServer.Controllers
         {
             try
             {
-                List<Agent> list = await _statisticsService.GetAgentsWithMissions();
+                List<Mission> list = await _statisticsService.GetCompatibleMissions();
                 return View(list);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
                 return RedirectToAction("Index", new { errors = "error" });
+            }
+        }
+
+        public async Task<IActionResult> AssignMission(int id, string? errors)
+        {
+            try
+            {
+                await _actionService.AssignMission(id);
+                ViewBag.Errors = errors;
+                return RedirectToAction("MissionControl");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return RedirectToAction("MissionControl", new { errors = "error assigning mission" });
             }
         }
 

@@ -20,7 +20,7 @@ namespace MosadMvcServer.Models
         public AgentStatus Status { get; set; } = AgentStatus.Idle;
         public int TotalKills { get; set; } = 0;
 
-       /* [JsonIgnore]*/
+        [JsonIgnore]
         public List<Mission>? Missions { get; set; }
 
         public Agent() { }

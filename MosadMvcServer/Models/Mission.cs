@@ -15,10 +15,10 @@ namespace MosadMvcServer.Models
 
         #region foreign_keys
         public int AgentId { get; set; }
-        [JsonIgnore]
+       
         public Agent? Agent { get; set; }
         public int TargetId { get; set; }
-        [JsonIgnore]
+     
         public Target? Target { get; set; }
         #endregion
 

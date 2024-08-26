@@ -114,11 +114,11 @@ namespace MosadMvcServer.Services
             return (list);
         }
 
-        internal async Task<List<Agent>> GetAgentsWithMissions()
+        internal async Task<List<Mission>> GetCompatibleMissions()
         {
-            string path = "agents/agentsWithMissions";
+            string path = "missions/CompatibleMissions";
 
-            var list = await _httpJsonService.GetAllAsync<Agent>(path);
+            var list = await _httpJsonService.GetAllAsync<Mission>(path);
 
             return(list);   
         }

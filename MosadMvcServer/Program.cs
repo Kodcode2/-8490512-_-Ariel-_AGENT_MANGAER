@@ -13,6 +13,7 @@ namespace MosadMvcServer
             builder.Services.AddScoped<HttpClient>();
             builder.Services.AddScoped<HttpJsonService>();
             builder.Services.AddScoped<StatisticsService>();
+            builder.Services.AddScoped<ActionService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -38,18 +38,6 @@ namespace MosadAPIServer.Controllers
 
         }
 
-        // GET: /agentsWithMissions
-        [HttpGet("agentsWithMissions")]
-        public async Task<ActionResult<List<Agent>>> GetAllAgentsWithMissions()
-        {
-            try
-            {
-                List<Agent> list = await _agentService.GetAllIdleAgentsWithMissions();
-                return Ok(list);
-
-            }
-            catch (Exception ex) { return NotFound(); }
-
-        }
+       
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MosadMvcServer.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,11 @@ namespace MosadMvcServer.ModelsHelpers
         public static bool IsInRange(Location location1, Location location2, int assignmentRange)
         {
             return Math.Abs((int)location1.X - (int)location2.X) < assignmentRange;
+        }
+
+        public override string ToString()
+        {
+            return $"X: {X} , Y: {Y}";
         }
     }
 }

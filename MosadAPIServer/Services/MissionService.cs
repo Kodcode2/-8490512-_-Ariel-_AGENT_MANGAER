@@ -74,7 +74,16 @@ namespace MosadAPIServer.Services
 
             foreach (var ct in compatableTargets)
             {
-                var newMission = new Mission() { AgentId = agent.Id, TargetId = ct.Id, Status = MissionStatus.OpenForAssignment };
+                var dis = DirectionsService.GetAirDistance(agent.GetLocation(), ct.GetLocation());
+                var timetokill = CalculateTimeToKill(agent, ct);
+                var newMission = new Mission()
+                { AgentId = agent.Id,
+                    TargetId = ct.Id,
+                    Status = MissionStatus.OpenForAssignment  ,
+                    TimeToKill = timetokill,
+                    Distance = dis
+                };
+
                 if (!existingCompMissions.Any(m=>m.TargetId == ct.Id) &&
                     DirectionsService.IsInRange(agent.GetLocation(), ct.GetLocation()))
                     _context.Add(newMission);
@@ -93,10 +102,16 @@ namespace MosadAPIServer.Services
 
             foreach (var compatableAgent in compatableAgents)
             {
+
+                var dis = DirectionsService.GetAirDistance(compatableAgent.GetLocation(), target.GetLocation());
+                var timetokill = CalculateTimeToKill(compatableAgent,target);
                 var newMission = new Mission() { 
                     AgentId = compatableAgent.Id,
                     TargetId = target.Id,
-                    Status = MissionStatus.OpenForAssignment };
+                    Status = MissionStatus.OpenForAssignment ,
+                    Distance = dis,
+                    TimeToKill = timetokill,
+                };
 
                 var existingCompMissions = await GetAllMatchingMissions(compatableAgent.Id);
                 if (!existingCompMissions.Any(m => m.TargetId == target.Id))
@@ -283,6 +298,13 @@ namespace MosadAPIServer.Services
             return new TimeSpan(factored / 60,factored % 60,0);
         }
 
-        
+        internal async Task<List<Mission>> CompatibleMissions()
+        {
+            var list = await _context.Mission.Include(m=>m.Agent).Include(m=>m.Target)
+                .Where(m=>m.Status == MissionStatus.OpenForAssignment)
+                .ToListAsync();
+
+            return list;
+        }
     }
 }

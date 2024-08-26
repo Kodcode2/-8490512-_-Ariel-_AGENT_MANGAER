@@ -116,15 +116,6 @@ namespace MosadAPIServer.Services
             return agentWithMissionId;
         }
 
-        internal async Task<List<Agent>> GetAllIdleAgentsWithMissions()
-        {
-            // the missions are open to assignment cuz the agent is idle
-            var idleAgentsWithMissions = await _context.Agent
-                .Where(a=>a.Status == AgentStatus.Idle)
-                .Include(a=>a.Missions)
-                .ToListAsync();
-
-            return idleAgentsWithMissions;
-        }
+        
     }
 }

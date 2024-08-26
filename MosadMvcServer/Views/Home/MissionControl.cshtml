@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MosadMvcServer.Models.Agent>
+﻿@model IEnumerable<MosadMvcServer.Models.Mission>
 
 @{
     ViewData["Title"] = "MissionControl";
@@ -6,9 +6,13 @@
 
 <h1>MissionControl</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (@ViewBag.Errors != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Errors
+    </div>
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -16,25 +20,24 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhotoUrl)
+                @Html.DisplayNameFor(model => model.Agent)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LocationX)
+                @Html.DisplayNameFor(model => model.Target)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LocationY)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NickName)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
+           
             <th>
-                @Html.DisplayNameFor(model => model.TotalKills)
+                @Html.DisplayNameFor(model => model.TimeToKill)
             </th>
             <th>
-                compatible missions
+                @Html.DisplayNameFor(model => model.Distance)
+            </th>
+            <th>
+                assign
             </th>
         </tr>
     </thead>
@@ -45,27 +48,29 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhotoUrl)
+                <h4>nick name: @item.Agent.NickName                 </h4>
+                <h4>location: @item.Agent.GetLocation().ToString(); </h4>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LocationX)
+                    <h4>nick name: @item.Target.Name</h4>
+                    <h4> role: @item.Target.Role                        </h4>
+                    <h4>location: @item.Target.GetLocation().ToString();</h4>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LocationY)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NickName)
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalKills)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Missions)
-            </td>
            
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeToKill)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Distance)
+            </td>
+                <td>
+                    <a asp-action="AssignMission" asp-route-id="@item.Id" class="btn btn-success">assign</a>
+                </td>
+          
         </tr>
 }
     </tbody>

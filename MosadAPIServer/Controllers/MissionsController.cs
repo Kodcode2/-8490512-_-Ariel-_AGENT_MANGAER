@@ -33,7 +33,7 @@ namespace MosadAPIServer.Controllers
         {
             return Ok(await _missionService.GetAllMissions(status));
         }
-
+        
         // GET: FullInfoMissions
         [HttpGet("fullInfo")]
         public async Task<ActionResult<IEnumerable<Mission>>> GetFullInfoMissions()
@@ -41,6 +41,22 @@ namespace MosadAPIServer.Controllers
             try
             {
                 return Ok(await _missionService.GetFullInfoMissions());
+            }
+            catch (Exception ex) 
+            {
+                Debug.WriteLine(ex.Message);
+                return BadRequest(ex.Message);
+            }
+            
+        }
+
+        // GET: CompatibleMissions
+        [HttpGet("CompatibleMissions")]
+        public async Task<ActionResult<IEnumerable<Mission>>> GetCompatibleMissions()
+        {
+            try
+            {
+                return Ok(await _missionService.CompatibleMissions());
             }
             catch (Exception ex) 
             {
