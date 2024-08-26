@@ -69,6 +69,9 @@ namespace MosadAPIServer.Migrations
                     b.Property<DateTime?>("AssignedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<double?>("Distance")
+                        .HasColumnType("float");
+
                     b.Property<TimeSpan?>("Duration")
                         .HasColumnType("time");
 

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<MosadMvcServer.Models.Agent>
+
+@{
+    ViewData["Title"] = "MissionControl";
+}
+
+<h1>MissionControl</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhotoUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationX)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NickName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalKills)
+            </th>
+            <th>
+                compatible missions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhotoUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationX)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NickName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalKills)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Missions)
+            </td>
+           
+        </tr>
+}
+    </tbody>
+</table>

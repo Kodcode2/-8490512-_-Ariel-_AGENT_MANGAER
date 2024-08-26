@@ -53,12 +53,17 @@ namespace MosadMvcServer.Controllers
 
                 return View(viewModel);
             }
+            catch (HttpRequestException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return RedirectToAction("Index", new { errors = "error fetching data from api" });
+            }
             catch (Exception ex) 
             {
                 Debug.WriteLine(ex);
                 return RedirectToAction("Index",new {errors = "error fetching data from api" });
             }
-            
+
         }
 
         public async Task<IActionResult> AgentsStat()
@@ -94,6 +99,20 @@ namespace MosadMvcServer.Controllers
             try
             {
                 List<Target> list = await _statisticsService.GetAllTargets();
+                return View(list);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return RedirectToAction("Index", new { errors = "error" });
+            }
+        }
+
+        public async Task<IActionResult> MissionControl()
+        {
+            try
+            {
+                List<Agent> list = await _statisticsService.GetAgentsWithMissions();
                 return View(list);
             }
             catch (Exception ex)

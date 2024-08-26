@@ -12,7 +12,7 @@ using MosadAPIServer.Data;
 namespace MosadAPIServer.Migrations
 {
     [DbContext(typeof(MosadAPIServerContext))]
-    [Migration("20240826114530_Init")]
+    [Migration("20240826132058_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -71,6 +71,9 @@ namespace MosadAPIServer.Migrations
 
                     b.Property<DateTime?>("AssignedTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<double?>("Distance")
+                        .HasColumnType("float");
 
                     b.Property<TimeSpan?>("Duration")
                         .HasColumnType("time");

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -28,7 +29,7 @@ namespace MosadAPIServer.Controllers
 
         // GET: Missions
         [HttpGet("")]
-        public async Task<ActionResult<IEnumerable<Mission>>> GetMission(string? status)
+        public async Task<ActionResult<IEnumerable<Mission>>> GetMissions(string? status)
         {
             return Ok(await _missionService.GetAllMissions(status));
         }
@@ -37,7 +38,16 @@ namespace MosadAPIServer.Controllers
         [HttpGet("fullInfo")]
         public async Task<ActionResult<IEnumerable<Mission>>> GetFullInfoMissions()
         {
-            return Ok(await _missionService.GetFullInfoMissions());
+            try
+            {
+                return Ok(await _missionService.GetFullInfoMissions());
+            }
+            catch (Exception ex) 
+            {
+                Debug.WriteLine(ex.Message);
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         // GET: Missions/5
@@ -58,11 +68,9 @@ namespace MosadAPIServer.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMission(int id , [FromBody]TokenDTO tokenDTO)
         {
-           
+        
             if (!MissionExists(id))
                 return NotFound();
-
-
             try
             {
                 await _missionService.AssignMission(id);
@@ -86,14 +94,14 @@ namespace MosadAPIServer.Controllers
 
         // POST: Missions/update
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateMissions()
+        public async Task<IActionResult> UpdateMissions([FromBody] TokenDTO tokenDTO)
         {
             await _missionService.UpdateMissions();
             return Ok();
         }
 
 
-
+      
 
         private bool MissionExists(int id)
         {

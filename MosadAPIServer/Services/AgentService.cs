@@ -111,9 +111,20 @@ namespace MosadAPIServer.Services
             {
                 var assignedMission = agent?.Missions?.FirstOrDefault(m => m.Status == MissionStatus.Assigned);
                 agentWithMissionId.Add(new AgentWithMissionIdDTO
-                    (agent, assignedMission?.Id, assignedMission.TimeToKill));
+                    (agent, assignedMission?.Id, assignedMission?.TimeToKill));
             }
             return agentWithMissionId;
+        }
+
+        internal async Task<List<Agent>> GetAllIdleAgentsWithMissions()
+        {
+            // the missions are open to assignment cuz the agent is idle
+            var idleAgentsWithMissions = await _context.Agent
+                .Where(a=>a.Status == AgentStatus.Idle)
+                .Include(a=>a.Missions)
+                .ToListAsync();
+
+            return idleAgentsWithMissions;
         }
     }
 }

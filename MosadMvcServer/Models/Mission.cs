@@ -27,8 +27,8 @@ namespace MosadMvcServer.Models
         public MissionStatus Status { get; set; } = MissionStatus.OpenForAssignment;
         public TimeSpan? Duration { get; set; }
         public TimeSpan? TimeToKill { get; set; }
-        
 
+        public double? Distance { get; set; }
 
     }
 }

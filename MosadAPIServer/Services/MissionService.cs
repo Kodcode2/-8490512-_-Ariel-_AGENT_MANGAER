@@ -221,6 +221,7 @@ namespace MosadAPIServer.Services
                 if(await CheckKill(mission)) continue;
 
                 mission.Duration = DateTime.Now - mission.AssignedTime;
+                mission.Distance = DirectionsService.GetAirDistance(mission.Agent.GetLocation(), mission.Target.GetLocation());
                 mission.TimeToKill = CalculateTimeToKill(mission.Agent, mission.Target);
                 _context.Update(mission);
             }
@@ -254,7 +255,8 @@ namespace MosadAPIServer.Services
             // fill mission details
             currMission.Status = MissionStatus.Assigned;
             currMission.AssignedTime = DateTime.Now;
-            currMission.TimeToKill = CalculateTimeToKill(mission.Agent , mission.Target);
+            currMission.TimeToKill = CalculateTimeToKill(currMission.Agent , currMission.Target);
+            currMission.Distance = DirectionsService.GetAirDistance(currMission.Agent.GetLocation(), currMission.Target.GetLocation());
             currMission.Duration = TimeSpan.Zero;
 
             //assign target to mission
@@ -276,7 +278,9 @@ namespace MosadAPIServer.Services
         private static TimeSpan? CalculateTimeToKill(Agent agent , Target target)
         {
             double tilesDis = DirectionsService.GetAirDistance(agent.GetLocation(), target.GetLocation());
-            return new TimeSpan((int)(tilesDis / 5 ),0,0);
+            int minutes = (int)(tilesDis * 60);
+            int factored = minutes / 5;             // לפי הדרישה לחלק ל 5
+            return new TimeSpan(factored / 60,factored % 60,0);
         }
 
         

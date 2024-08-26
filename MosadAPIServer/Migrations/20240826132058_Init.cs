@@ -59,7 +59,8 @@ namespace MosadAPIServer.Migrations
                     AssignedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     Duration = table.Column<TimeSpan>(type: "time", nullable: true),
-                    TimeToKill = table.Column<TimeSpan>(type: "time", nullable: true)
+                    TimeToKill = table.Column<TimeSpan>(type: "time", nullable: true),
+                    Distance = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
