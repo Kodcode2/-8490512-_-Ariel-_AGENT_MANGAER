@@ -14,7 +14,7 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhotoUrl)
+                photo
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LocationX)
@@ -44,8 +44,8 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhotoUrl)
-            </td>
+                    <img src="@Html.DisplayFor(modelItem => item.PhotoUrl)" width="50px" />
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LocationX)
             </td>

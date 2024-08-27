@@ -102,6 +102,10 @@ namespace MosadAPIServer.Controllers
             {
                 return NotFound();
             }
+            catch (InvalidOperationException ex) 
+            {
+                return BadRequest(new { message = ex.Message });
+            }
 
             return NoContent();
         }
@@ -109,7 +113,7 @@ namespace MosadAPIServer.Controllers
 
 
         // POST: Missions/update
-        [HttpPut("update")]
+        [HttpPost("update")]
         public async Task<IActionResult> UpdateMissions([FromBody] TokenDTO tokenDTO)
         {
             await _missionService.UpdateMissions();

@@ -4,6 +4,7 @@ using MosadMvcServer.Models;
 using MosadMvcServer.Services;
 using MosadMvcServer.ViewModels;
 using System.Diagnostics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MosadMvcServer.Controllers
 {
@@ -12,10 +13,11 @@ namespace MosadMvcServer.Controllers
         private readonly StatisticsService _statisticsService;
         private readonly ActionService _actionService;
 
-        public HomeController( StatisticsService statisticsService , ActionService actionService)
+        public HomeController( StatisticsService statisticsService , ActionService actionService , HttpJsonService httpJsonService)
         {
             _statisticsService = statisticsService;
             _actionService = actionService;
+            TokenService.InitToken(httpJsonService);
         }
 
         public IActionResult Index(string? errors)
@@ -52,6 +54,7 @@ namespace MosadMvcServer.Controllers
                 var CompatableMissionsInfo = await _statisticsService.GetCompatiblePairsCount();
                 viewModel.idleAgentCount = CompatableMissionsInfo.Item1;
                 viewModel.unassignedTargetCount = CompatableMissionsInfo.Item2;
+                Response.Headers.Append("Refresh", "5");
 
                 return View(viewModel);
             }
@@ -78,7 +81,7 @@ namespace MosadMvcServer.Controllers
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                return RedirectToAction("Index", new { errors = "error" });
+                return RedirectToAction("Index", new { errors = ex.Message });
             }
         }
 
@@ -87,12 +90,13 @@ namespace MosadMvcServer.Controllers
             try
             {
                 Mission mission = await _statisticsService.GetMission(id);
+
                 return View(mission);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                return RedirectToAction("Index", new { errors = "error fetching mission details" });
+                return RedirectToAction("Index", new { errors = "error fetching mission details" +  ex.Message });
             }
         }
 
@@ -101,26 +105,55 @@ namespace MosadMvcServer.Controllers
             try
             {
                 List<Target> list = await _statisticsService.GetAllTargets();
+                Response.Headers.Append("Refresh", "5");
+
                 return View(list);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                return RedirectToAction("Index", new { errors = "error" });
+                return RedirectToAction("Index", new { errors = ex.Message });
             }
         }
 
-        public async Task<IActionResult> MissionControl()
+        public async Task<IActionResult> MissionControl(string? errors)
         {
             try
             {
                 List<Mission> list = await _statisticsService.GetCompatibleMissions();
+                ViewBag.Errors = errors;
+                Response.Headers.Append("Refresh", "5");
+
                 return View(list);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                return RedirectToAction("Index", new { errors = "error" });
+                return RedirectToAction("Index", new { errors = ex.Message });
+            }
+        }
+
+        public async Task<IActionResult> MatrixView()
+        {
+            try {
+                var agents = await _statisticsService.GetAgentsWithMissionId();
+                var targets = await _statisticsService.GetAllTargets();
+
+                var vm = new AgentsWithTargetsVM() { AgentsWithMissionId = agents , targets = targets };
+                Response.Headers.Append("Refresh", "5");
+                return View(vm);
+            }
+            catch (HttpRequestException e)
+            {
+                return RedirectToAction("Index", new
+                {
+                    errors = e.Message + e.HttpRequestError.ToString()
+                });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return RedirectToAction("Index", new { errors = "error assigning mission: " + ex.Message });
             }
         }
 
@@ -132,10 +165,17 @@ namespace MosadMvcServer.Controllers
                 ViewBag.Errors = errors;
                 return RedirectToAction("MissionControl");
             }
+            catch (HttpRequestException e)
+            {
+                return RedirectToAction("MissionControl", new
+                {
+                    errors = e.Message + e.HttpRequestError.ToString()
+                });
+            }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                return RedirectToAction("MissionControl", new { errors = "error assigning mission" });
+                return RedirectToAction("MissionControl", new { errors = "error assigning mission: " + ex.Message });
             }
         }
 

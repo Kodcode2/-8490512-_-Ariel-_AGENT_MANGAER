@@ -1,0 +1,47 @@
+﻿@model MosadMvcServer.ViewModels.AgentsWithTargetsVM
+
+@{
+    ViewData["Title"] = "MatrixView";
+    int size = 100;
+}
+
+<h1>MatrixView</h1>
+
+<div>
+    <h4>AgentsWithTargetsVM</h4>
+    <hr />
+    <dl class="row">
+    </dl>
+</div>
+
+
+<table style="border-collapse: collapse; width: 100%;">
+    @for (int row = 0; row < size; row++)
+    {
+        <tr>
+            @for (int col = 0; col < size; col++)
+            {
+                <td style="border: 1px solid black; width: 20px; height: 20px;" >
+                    @foreach(var agent in Model.AgentsWithMissionId)
+                    {
+                        if(agent.LocationY == row && agent.LocationX == col)
+                        {
+                            <p>@(agent.AssignedMissionId == null? "a": "A")</p>
+                        }
+                    }
+                    @foreach (var target in Model.targets)
+                    {
+                        if (target.LocationY == row && target.LocationX == col)
+                        {
+                            <p>@(target.Status == MosadMvcServer.Enums.TargetStatus.Terminated? "D" : target.AssignedToMission ? "T" : "t")</p>
+                        }
+                    }
+                </td>
+            }
+        </tr>
+    }
+</table>
+
+<div>
+    <a asp-action="Index">Back</a>
+</div>

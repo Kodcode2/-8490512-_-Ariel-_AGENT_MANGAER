@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System.Text;
 using MosadMvcServer.DTO;
+using System.IO;
 
 namespace MosadMvcServer.Services
 {
@@ -13,6 +14,17 @@ namespace MosadMvcServer.Services
         public HttpJsonService(HttpClient httpClient)
         {
             _httpClient = httpClient;
+        }
+
+        public async Task<TokenDTO> GetToken(string id)
+        {
+            var json = JsonConvert.SerializeObject(new IdForTokenDTO() { Id = id }, Formatting.Indented);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync($"{_baseUrl}login",content);
+            response.EnsureSuccessStatusCode();
+            var result = await response.Content.ReadFromJsonAsync<TokenDTO>();
+            return result;
         }
 
         public async Task<T?> GetAsync<T>(string path , int id)

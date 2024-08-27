@@ -210,6 +210,8 @@ namespace MosadAPIServer.Services
             mission.Agent.TotalKills++;
 
             _context.Entry(mission).State = EntityState.Modified;
+            _context.Entry(mission.Target).State = EntityState.Modified;
+            _context.Entry(mission.Agent).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 
@@ -267,6 +269,8 @@ namespace MosadAPIServer.Services
 
             var currMission = _context.Mission.Include(m=>m.Agent).Include(m=>m.Target).First(m=>m.Id == mission.Id);
 
+            if (currMission.Target.AssignedToMission) throw new InvalidOperationException("target already assigned");
+
             // fill mission details
             currMission.Status = MissionStatus.Assigned;
             currMission.AssignedTime = DateTime.Now;
@@ -283,6 +287,12 @@ namespace MosadAPIServer.Services
             // remove all compatable with same target id
             var missionList = _context.Mission.Include(m=>m.Agent).Include(m=>m.Target).
                 Where(m=>m.Id == mission.Id && m.TargetId == mission.TargetId && m.AgentId != mission.AgentId);
+            _context.RemoveRange(missionList);
+
+
+            // remove all compatable with same agentId
+            missionList = _context.Mission.Include(m => m.Agent).Include(m => m.Target).
+                Where(m => m.Id != mission.Id && m.AgentId == mission.AgentId);
             _context.RemoveRange(missionList);
 
 

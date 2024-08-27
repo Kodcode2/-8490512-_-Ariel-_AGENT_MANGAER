@@ -13,7 +13,7 @@ namespace MosadAPIServer.Controllers
         public HomeController(TokenService tokenService) { }
 
         // POST: api/T
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] IdForTokenDTO idDTO)
         {
             try
